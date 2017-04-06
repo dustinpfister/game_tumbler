@@ -7,7 +7,7 @@ var Tumbler = (function () {
         this.ticks = 60;
         this.radius = obj.radius || 100;
         this.startTick = 0;
-        this.goalTick = 15;
+        this.goalTick = 30;
         this.dir = 1;
 
     };
@@ -17,6 +17,7 @@ var Tumbler = (function () {
         rings : [],
         current : {
             ring : 0,
+            goalTick : 15,
             pos : 0
         }
     },
@@ -42,6 +43,8 @@ var Tumbler = (function () {
         var ring = state.rings[state.current.ring];
 
         state.current.pos += ring.dir === 0 ? 1 : -1;
+
+        //state.current.goalTick = ring.goalTick;
 
         if (state.current.pos >= ring.ticks) {
 

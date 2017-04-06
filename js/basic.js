@@ -17,6 +17,7 @@
     var draw = function () {
 
         var tumb = Tumbler(),
+        radian,
         ring = tumb.rings[tumb.current.ring];
 
         // clear
@@ -47,8 +48,19 @@
         ctx.strokeStyle = '#ff0000';
         ctx.beginPath();
 
-        var radian = Math.PI * 2 / ring.ticks * tumb.current.pos;
+        radian = Math.PI * 2 / ring.ticks * tumb.current.pos;
+        ctx.beginPath();
+        ctx.arc(
+            160 + Math.cos(radian) * ring.radius,
+            120 + Math.sin(radian) * ring.radius,
+            5, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.stroke();
 
+        // draw goal
+        radian = Math.PI * 2 / ring.ticks * tumb.current.goalTick;
+        ctx.strokeStyle = '#00ff00';
+        ctx.beginPath();
         ctx.arc(
             160 + Math.cos(radian) * ring.radius,
             120 + Math.sin(radian) * ring.radius,
