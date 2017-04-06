@@ -34,7 +34,7 @@ var Tumbler = (function () {
         gameOver : false,
         canLoose : false,
         loose : false,
-        ringJump : false // to new right?
+        nextRing : false // to next ring?
 
     },
 
@@ -64,7 +64,8 @@ var Tumbler = (function () {
             console.log();
 
         // user action will result in gameOver
-        state.gameOver = true;
+        //state.gameOver = true;
+        state.nextRing = true;
 
         state.loose = true;
         if (fromGoal <= state.current.tolerance) {
@@ -110,13 +111,52 @@ var Tumbler = (function () {
 
         }
 
+    },
+
+    // to next ring
+    toNextRing = function () {
+
+        var ring = state.rings[state.current.ring],
+
+        nextRing;
+
+        console.log('yes');
+
+        if (state.current.ring < state.rings.length) {
+
+            nextRing = state.rings[state.current.ring + 1];
+
+            ring.radius += 5;
+            nextRing.radius += 5;
+
+            if (nextRing.radius >= 100) {
+
+                state.current.ring += 1;
+                state.nextRing = false;
+
+            }
+
+        } else {
+
+            state.gameOver = true;
+
+        }
+
     };
 
     api.update = function () {
 
         if (!state.gameOver) {
 
-            playCurrentRing();
+            if (state.nextRing) {
+
+                toNextRing();
+
+            } else {
+
+                playCurrentRing();
+
+            }
 
         }
 
