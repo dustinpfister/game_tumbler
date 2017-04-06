@@ -33,7 +33,8 @@ var Tumbler = (function () {
         },
         gameOver : false,
         canLoose : false,
-        loose : false
+        loose : false,
+        ringJump : false // to new right?
 
     },
 
@@ -74,42 +75,48 @@ var Tumbler = (function () {
 
     };
 
-    api.update = function () {
+    var playCurrentRing = function () {
 
         var ring = state.rings[state.current.ring];
 
+        state.current.pos += ring.dir === 0 ? 1 : -1;
+
+        state.current.goalTick = ring.goalTick;
+
+        if (state.current.pos >= ring.ticks) {
+
+            state.current.pos = 0;
+
+        }
+
+        if (state.current.pos < 0) {
+
+            state.current.pos = ring.ticks - 1;
+
+        }
+
+        if (ring.fromPos(state.current.pos) <= state.current.tolerance) {
+
+            state.canLoose = true;
+
+        } else {
+
+            if (state.canLoose) {
+
+                state.gameOver = true;
+                state.loose = true;
+
+            }
+
+        }
+
+    };
+
+    api.update = function () {
+
         if (!state.gameOver) {
 
-            state.current.pos += ring.dir === 0 ? 1 : -1;
-
-            state.current.goalTick = ring.goalTick;
-
-            if (state.current.pos >= ring.ticks) {
-
-                state.current.pos = 0;
-
-            }
-
-            if (state.current.pos < 0) {
-
-                state.current.pos = ring.ticks - 1;
-
-            }
-
-            if (ring.fromPos(state.current.pos) <= state.current.tolerance) {
-
-                state.canLoose = true;
-
-            } else {
-
-                if (state.canLoose) {
-
-                    state.gameOver = true;
-                    state.loose = true;
-
-                }
-
-            }
+            playCurrentRing();
 
         }
 
