@@ -27,20 +27,24 @@
         // draw rings
         tumb.rings.forEach(function (ring, index) {
 
-            ctx.strokeStyle = '#ffffff';
+            if (index >= tumb.current.ring) {
 
-            if (tumb.current.ring === index) {
+                ctx.strokeStyle = '#ffffff';
 
-                ctx.strokeStyle = '#ffff00';
+                if (tumb.current.ring === index) {
+
+                    ctx.strokeStyle = '#ffff00';
+
+                }
+
+                // draw the circle
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(160, 120, ring.radius, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.stroke();
 
             }
-
-            // draw the circle
-            ctx.lineWidth = 3;
-            ctx.beginPath();
-            ctx.arc(160, 120, ring.radius, 0, Math.PI * 2);
-            ctx.closePath();
-            ctx.stroke();
 
         });
 

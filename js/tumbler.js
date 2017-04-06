@@ -49,9 +49,15 @@ var Tumbler = (function () {
         state.rings = [];
         state.rings.push(new Ring());
         state.rings.push(new Ring({
-                radius : 50
+                radius : 40
+            }));
+        state.rings.push(new Ring({
+                radius : 20
             }));
 
+        state.rings.push(new Ring({
+                radius : 10
+            }));
     };
 
     // a user action has occurred.
@@ -122,11 +128,11 @@ var Tumbler = (function () {
 
         console.log('yes');
 
-        if (state.current.ring < state.rings.length-1) {
+        if (state.current.ring < state.rings.length - 1) {
 
             nextRing = state.rings[state.current.ring + 1];
 
-            ring.radius += 5;
+            ring.radius += 15;
             nextRing.radius += 5;
 
             if (nextRing.radius >= 100) {
