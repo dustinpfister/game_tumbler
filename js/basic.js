@@ -45,10 +45,9 @@
         });
 
         // draw pointer
-        ctx.strokeStyle = '#ff0000';
-        ctx.beginPath();
-
         radian = Math.PI * 2 / ring.ticks * tumb.current.pos;
+
+        ctx.strokeStyle = '#ff0000';
         ctx.beginPath();
         ctx.arc(
             160 + Math.cos(radian) * ring.radius,
@@ -59,6 +58,7 @@
 
         // draw goal
         radian = Math.PI * 2 / ring.ticks * tumb.current.goalTick;
+
         ctx.strokeStyle = '#00ff00';
         ctx.beginPath();
         ctx.arc(
@@ -72,7 +72,9 @@
 
     update = function () {
 
-        requestAnimationFrame(update);
+        //requestAnimationFrame(update);
+
+        setTimeout(update, 500);
 
         Tumbler.update();
 
