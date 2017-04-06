@@ -53,6 +53,27 @@ var Tumbler = (function () {
 
     };
 
+    // a user action has occurred.
+    api.userAction = function () {
+
+        var ring = state.rings[state.current.ring],
+
+        fromGoal = ring.fromPos(state.current.pos)
+
+            console.log();
+
+        // user action will result in gameOver
+        state.gameOver = true;
+
+        state.loose = true;
+        if (fromGoal <= state.current.tolerance) {
+
+            state.loose = false;
+
+        }
+
+    };
+
     api.update = function () {
 
         var ring = state.rings[state.current.ring];

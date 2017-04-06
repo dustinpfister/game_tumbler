@@ -81,6 +81,14 @@
         draw();
 
     };
+	
+	canvas.addEventListener('click', function(e){
+		
+		Tumbler.userAction();
+		
+		console.log('test');
+		
+	});
 
     update();
 
