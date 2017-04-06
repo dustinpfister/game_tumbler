@@ -4,10 +4,10 @@ var Tumbler = (function () {
 
         obj = obj || {};
 
-        this.ticks = 60;
+        this.ticks = 120;
         this.radius = obj.radius || 100;
         this.startTick = 0;
-        this.goalTick = 10;
+        this.goalTick = 30;
         this.dir = 0;
 
     };
@@ -32,7 +32,8 @@ var Tumbler = (function () {
             tolerance : 3
         },
         gameOver : false,
-        canLoose : false
+        canLoose : false,
+        loose : false
 
     },
 
@@ -83,12 +84,11 @@ var Tumbler = (function () {
                 if (state.canLoose) {
 
                     state.gameOver = true;
+                    state.loose = true;
 
                 }
 
             }
-
-            console.log();
 
         }
 

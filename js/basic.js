@@ -21,7 +21,7 @@
         ring = tumb.rings[tumb.current.ring];
 
         // clear
-        ctx.fillStyle = '#2a2a2a';
+        ctx.fillStyle = tumb.gameOver ? tumb.loose ? '#af0000': '#00af00' :'#2a2a2a';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // draw rings
@@ -74,7 +74,7 @@
 
         //requestAnimationFrame(update);
 
-        setTimeout(update, 500);
+        setTimeout(update, 33);
 
         Tumbler.update();
 
