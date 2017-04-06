@@ -4,11 +4,11 @@ var Tumbler = (function () {
 
         obj = obj || {};
 
-        this.ticks = 120;
+        this.ticks = obj.ticks || 120;
         this.radius = obj.radius || 100;
-        this.startTick = 0;
-        this.goalTick = 30;
-        this.dir = 0;
+        this.startTick = obj.startTick || 0;
+        this.goalTick = obj.goalTick || 30;
+        this.dir = obj.dir || 0;
 
     };
 
@@ -44,20 +44,37 @@ var Tumbler = (function () {
 
     };
 
+    var rndRing = function (radius) {
+
+        var ticks = 180,
+        startPos = Math.floor(Math.random() * 180),
+        goalTick = Math.floor(startPos + ticks / 2);
+
+        if (goalTick > ticks) {
+
+            goalTick -= ticks;
+
+        }
+
+        return new Ring({
+
+            ticks : ticks,
+            startTick : startPos,
+            goalTick : goalTick,
+            radius : radius
+
+        });
+
+    };
+
     api.setup = function () {
 
         state.rings = [];
-        state.rings.push(new Ring());
-        state.rings.push(new Ring({
-                radius : 40
-            }));
-        state.rings.push(new Ring({
-                radius : 20
-            }));
+        state.rings.push(rndRing(100));
+        state.rings.push(rndRing(40));
+        state.rings.push(rndRing(20));
+        state.rings.push(rndRing(10));
 
-        state.rings.push(new Ring({
-                radius : 10
-            }));
     };
 
     // a user action has occurred.
