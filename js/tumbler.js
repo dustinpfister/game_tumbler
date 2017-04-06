@@ -122,7 +122,7 @@ var Tumbler = (function () {
 
         console.log('yes');
 
-        if (state.current.ring < state.rings.length) {
+        if (state.current.ring < state.rings.length-1) {
 
             nextRing = state.rings[state.current.ring + 1];
 
@@ -131,8 +131,11 @@ var Tumbler = (function () {
 
             if (nextRing.radius >= 100) {
 
+                state.current.pos = nextRing.startTick;
+
                 state.current.ring += 1;
                 state.nextRing = false;
+                state.canLoose = false;
 
             }
 
